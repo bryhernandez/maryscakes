@@ -227,3 +227,35 @@ footer p {
 html {
     scroll-behavior: smooth;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .carousel {
+        max-width: 95%; /* Allow more width on smaller screens */
+        height: 300px; /* Adjust height for smaller screens */
+    }
+
+    .prev, .next {
+        font-size: 20px; /* Smaller arrows on mobile */
+        padding: 8px; /* Adjust padding */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Smaller heading on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel {
+        height: 250px; /* Further adjust height for very small screens */
+    }
+
+    .prev, .next {
+        font-size: 18px; /* Even smaller arrows */
+        padding: 6px; /* Adjust padding */
+    }
+
+    h2 {
+        font-size: 1.2em; /* Smaller heading on very small screens */
+    }
+}
