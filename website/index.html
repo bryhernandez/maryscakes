@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mary's Cakes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <h1>Mary's Cakes</h1>
+        <nav>
+            <ul>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <!-- Portfolio Section -->
+    <!-- <section id="portfolio">
+        <h2>Portfolio</h2>
+    
+        <div class="carousel">
+            <button class="prev" onclick="prevSlide()">&#10094;</button>  Left Arrow -->
+            <!-- <div class="carousel-images">
+                <img src="IMG_3374.jpg" alt="Cake Design 1" class="carousel-slide">
+                <img src="IMG_3375.jpg" alt="Cake Design 2" class="carousel-slide">
+                <img src="IMG_3376.jpg" alt="Cake Design 3" class="carousel-slide">
+                <img src="IMG_3377.jpg" alt="Cake Design 4" class="carousel-slide">
+            </div>
+            <button class="next" onclick="nextSlide()">&#10095;</button>  Right Arrow -->
+        <!-- </div>
+    </section>  -->
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+    
+        <div class="carousel">
+            <button class="prev" onclick="prevSlide()">&#10094;</button> <!-- Left Arrow -->
+            <div class="carousel-images">
+                <img src="IMG_3374.jpg" alt="Cake Design 1 - image 1" class="carousel-slide">
+                <img src="IMG_3375.jpg" alt="Cake Design 2 - image 2" class="carousel-slide">
+                <img src="IMG_3376.jpg" alt="Cake Design 3 - image 3" class="carousel-slide">
+                <img src="IMG_3377.jpg" alt="Cake Design 4 - image 4" class="carousel-slide">
+            </div>
+            <button class="next" onclick="nextSlide()">&#10095;</button> <!-- Right Arrow -->
+        </div>
+    </section>
+    
+
+    
+    
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Welcome to Mary's Cakes, where we turn your cake dreams into reality! With a passion for baking and a love for art, every cake is crafted to perfection. We specialize in wedding cakes, birthday cakes, and custom designs for any occasion.</p>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial">
+            <p>"The cake for our wedding was absolutely stunning! Tasted even better than it looked." - Sarah</p>
+        </div>
+        <div class="testimonial">
+            <p>"Bryan's custom cakes are a work of art! The attention to detail is incredible." - John</p>
+        </div>
+        <!-- Add more testimonials -->
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <h2>Pricing and Packages</h2>
+        <ul>
+            <li>Wedding Cakes: Starting at $300</li>
+            <li>Birthday Cakes: Starting at $100</li>
+            <li>Custom Cakes: Contact us for a quote</li>
+        </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+    
+            <input type="submit" value="Send">
+            <p id="form-response" style="display:none; color:green;"></p>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Mary's Cakes</p>
+    </footer>
+
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+        
+            const form = event.target;
+            const formData = new FormData(form);
+        
+            // Fetch URL from Google Apps Script
+            const scriptURL = "https://script.google.com/macros/s/AKfycbxuY2lTBxscR9OHBVE5xuji5oPEqRrUhijwKrC4wQA_Lsset70a2pCn4hZog2Tqc6bAJg/exec";  // Paste your Google Script URL here
+        
+            // Post form data to Google Sheets
+            fetch(scriptURL, {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("form-response").textContent = "Thank you! Your message has been sent.";
+                document.getElementById("form-response").style.display = "block";
+                form.reset(); // Reset the form after successful submission
+            })
+            .catch(error => {
+                document.getElementById("form-response").textContent = "Oops! There was an error.";
+                document.getElementById("form-response").style.display = "block";
+                console.error("Error!", error.message);
+            });
+        });
+
+
+    </script>
+    <script>
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("carousel-slide");
+        
+        // Function to show the current slide
+        function showSlide(index) {
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+                slides[i].style.display = 'none';
+            }
+        
+            // Loop the index if out of range
+            if (index >= slides.length) {
+                slideIndex = 0;
+            }
+            if (index < 0) {
+                slideIndex = slides.length - 1;
+            }
+        
+            // Display the current slide
+            slides[slideIndex].classList.add('active');
+            slides[slideIndex].style.display = 'block';
+        }
+        
+        // Function for moving to the next slide
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+        
+        // Function for moving to the previous slide
+        function prevSlide() {
+            slideIndex--;
+            showSlide(slideIndex);
+        }
+        
+        // Automatically change slides every 3 seconds
+        setInterval(() => {
+            nextSlide();
+        }, 3000);
+        
+        // Initialize the first slide
+        window.onload = function() {
+            showSlide(slideIndex);
+        };
+    </script>
+        
+        
+        
+        
+</body>
+</html>
